@@ -269,6 +269,28 @@ class Client
 		return $response;
 	}
 
+    /**
+     * Validate invoice(s)
+     * https://github.com/odoo/odoo/blob/12.0/addons/account/models/account_invoice.py#L932
+     *
+     * @param array $ids Array of 'account.invoice' id's
+     *
+     * @return boolean True is successful
+     */
+	public function action_invoice_open($ids)
+    {
+        $response = $this->getClient('object')->execute_kw(
+            $this->database,
+            $this->uid(),
+            $this->password,
+            'account.invoice',
+            'action_invoice_open',
+            $ids
+        );
+
+        return $response;
+    }
+
 	/**
 	 * Get XmlRpc Client
 	 *
