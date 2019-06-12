@@ -291,6 +291,28 @@ class Client
         return $response;
     }
 
+    /**
+     * Register payment(s)
+     * https://github.com/odoo/odoo/blob/12.0/addons/account/models/account_payment.py#L665
+     *
+     * @param array $ids Array of 'account.payment' id's
+     *
+     * @return boolean True is successful
+     */
+    public function action_validate_invoice_payment($ids)
+    {
+        $response = $this->getClient('object')->execute_kw(
+            $this->database,
+            $this->uid(),
+            $this->password,
+            'account.payment',
+            'action_validate_invoice_payment',
+            $ids
+        );
+
+        return $response;
+    }
+
 	/**
 	 * Get XmlRpc Client
 	 *
